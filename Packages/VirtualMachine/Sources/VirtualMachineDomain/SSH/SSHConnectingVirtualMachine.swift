@@ -34,6 +34,7 @@ public final class SSHConnectingVirtualMachine<SSHClientType: SSHClient>: Virtua
     public var name: String {
         virtualMachine.name
     }
+
     public var canStart: Bool {
         virtualMachine.canStart
     }
@@ -55,10 +56,10 @@ public final class SSHConnectingVirtualMachine<SSHClientType: SSHClient>: Virtua
     public func start() async throws {
         try await withThrowingTaskGroup(of: StartVirtualMachineResult.self) { group in
             group.addTask {
-                return try await self.startVirtualMachine()
+                try await self.startVirtualMachine()
             }
             group.addTask {
-                return try await self.connect(to: self.virtualMachine)
+                try await self.connect(to: self.virtualMachine)
             }
             for try await result in group {
                 switch result {
@@ -110,7 +111,7 @@ public final class SSHConnectingVirtualMachine<SSHClientType: SSHClient>: Virtua
 private extension SSHConnectingVirtualMachine {
     private func startVirtualMachine() async throws -> StartVirtualMachineResult {
         do {
-            try await self.virtualMachine.start()
+            try await virtualMachine.start()
             return .success(.virtualMachineTerminated)
         } catch {
             if error is CancellationError {

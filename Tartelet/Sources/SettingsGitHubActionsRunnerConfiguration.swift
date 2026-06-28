@@ -9,18 +9,23 @@ struct SettingsGitHubActionsRunnerConfiguration<
     var runnerDisableDefaultLabels: Bool {
         settingsStore.gitHubRunnerDisableDefaultLabels
     }
+
     var runnerDisableUpdates: Bool {
         settingsStore.gitHubRunnerDisableUpdates
     }
+
     var runnerScope: GitHubRunnerScope {
         settingsStore.githubRunnerScope
     }
+
     var runnerLabels: String {
         settingsStore.gitHubRunnerLabels
     }
+
     var runnerGroup: String {
         settingsStore.gitHubRunnerGroup
     }
+
     var runnerName: String {
         settingsStore.gitHubRunnerName
     }

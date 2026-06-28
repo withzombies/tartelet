@@ -1,4 +1,4 @@
-name: SwiftLint
+name: Hygiene
 permissions:
   contents: read
   pull-requests: write
@@ -6,12 +6,16 @@ on:
   workflow_dispatch: {}
   pull_request: {}
 jobs:
-  SwiftLint:
+  Lint:
     runs-on: macos-13
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           submodules: recursive
-      - name: SwiftLint
-        run: swiftlint --quiet --reporter github-actions-logging
+      - name: Install tools
+        run: brew install swiftformat swiftlint
+      - name: SwiftFormat lint
+        run: swiftformat --lint .
+      - name: SwiftLint strict
+        run: swiftlint --strict --quiet --reporter github-actions-logging

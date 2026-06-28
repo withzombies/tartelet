@@ -1,7 +1,11 @@
 #!/bin/bash
+set -euo pipefail
+
 export PATH="$PATH:/opt/homebrew/bin"
-if which swiftlint >/dev/null; then
-  swiftlint
+if command -v swiftlint >/dev/null; then
+  echo "Running SwiftLint..."
+  swiftlint --strict
 else
-  echo "warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint"
+  echo "error: SwiftLint not installed, install with: brew install swiftlint"
+  exit 1
 fi

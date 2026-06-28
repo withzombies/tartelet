@@ -33,6 +33,7 @@ public final class AppStorageSettingsStore: SettingsStore {
             }
         }
     }
+
     public var tartHomeFolderURL: URL? {
         get {
             access(keyPath: \.tartHomeFolderURL)
@@ -44,6 +45,7 @@ public final class AppStorageSettingsStore: SettingsStore {
             }
         }
     }
+
     public var virtualMachine: VirtualMachine {
         get {
             access(keyPath: \.virtualMachine)
@@ -58,6 +60,7 @@ public final class AppStorageSettingsStore: SettingsStore {
             }
         }
     }
+
     public var numberOfVirtualMachines: Int {
         get {
             access(keyPath: \.numberOfVirtualMachines)
@@ -72,6 +75,7 @@ public final class AppStorageSettingsStore: SettingsStore {
             }
         }
     }
+
     public var startVirtualMachinesOnLaunch: Bool {
         get {
             access(keyPath: \.startVirtualMachinesOnLaunch)
@@ -83,6 +87,7 @@ public final class AppStorageSettingsStore: SettingsStore {
             }
         }
     }
+
     public var gitHubPrivateKeyName: String? {
         get {
             access(keyPath: \.gitHubPrivateKeyName)
@@ -94,6 +99,7 @@ public final class AppStorageSettingsStore: SettingsStore {
             }
         }
     }
+
     public var gitHubRunnerDisableUpdates: Bool {
         get {
             access(keyPath: \.gitHubRunnerDisableUpdates)
@@ -105,6 +111,7 @@ public final class AppStorageSettingsStore: SettingsStore {
             }
         }
     }
+
     public var gitHubRunnerLabels: String {
         get {
             access(keyPath: \.gitHubRunnerLabels)
@@ -116,6 +123,7 @@ public final class AppStorageSettingsStore: SettingsStore {
             }
         }
     }
+
     public var gitHubRunnerGroup: String {
         get {
             access(keyPath: \.gitHubRunnerGroup)
@@ -127,6 +135,7 @@ public final class AppStorageSettingsStore: SettingsStore {
             }
         }
     }
+
     public var gitHubRunnerName: String {
         get {
             access(keyPath: \.gitHubRunnerName)
@@ -138,6 +147,7 @@ public final class AppStorageSettingsStore: SettingsStore {
             }
         }
     }
+
     public var gitHubRunnerDisableDefaultLabels: Bool {
         get {
             access(keyPath: \.gitHubRunnerDisableDefaultLabels)
@@ -149,6 +159,7 @@ public final class AppStorageSettingsStore: SettingsStore {
             }
         }
     }
+
     public var githubRunnerScope: GitHubRunnerScope {
         get {
             access(keyPath: \.githubRunnerScope)
@@ -173,7 +184,7 @@ public final class AppStorageSettingsStore: SettingsStore {
 
 private extension UserDefaults {
     func getRawRepresentable<T: RawRepresentable>(
-        _ type: T.Type,
+        _: T.Type,
         forKey key: String
     ) -> T? where T.RawValue == String {
         guard let rawValue = string(forKey: key) else {

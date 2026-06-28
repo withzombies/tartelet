@@ -8,7 +8,7 @@ public final class VirtualMachineFleet {
 
     private let logger: Logger
     private let baseVirtualMachine: VirtualMachine
-    private var activeTasks: [String: Task<(), Never>] = [:]
+    private var activeTasks: [String: Task<Void, Never>] = [:]
 
     public init(logger: Logger, baseVirtualMachine: VirtualMachine) {
         self.logger = logger
@@ -85,7 +85,7 @@ private extension VirtualMachineFleet {
             } catch {
                 logger.info(
                     "Virtual machine named \(virtualMachine.name) stopped with message: "
-                    + error.localizedDescription
+                        + error.localizedDescription
                 )
                 throw error
             }
@@ -97,7 +97,7 @@ private extension VirtualMachineFleet {
                 } catch {
                     self.logger.info(
                         "Could not delete virtual machine named \(virtualMachine.name): "
-                        + error.localizedDescription
+                            + error.localizedDescription
                     )
                     throw error
                 }

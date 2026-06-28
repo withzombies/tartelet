@@ -39,6 +39,7 @@ let package = Package(
             .product(name: "LoggingDomain", package: "Logging"),
             .product(name: "VirtualMachineDomain", package: "VirtualMachine")
         ], resources: [
+            .process("Internal/Assets.xcassets"),
             .process("Internal/Localizable.strings")
         ])
     ]

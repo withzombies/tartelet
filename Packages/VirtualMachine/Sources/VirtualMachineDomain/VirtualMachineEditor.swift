@@ -8,7 +8,7 @@ public final class VirtualMachineEditor {
     private let logger: Logger
     private let virtualMachine: VirtualMachine
     @ObservationIgnored
-    private var runTask: Task<(), Error>? {
+    private var runTask: Task<Void, Error>? {
         didSet {
             isStarted = runTask != nil
         }

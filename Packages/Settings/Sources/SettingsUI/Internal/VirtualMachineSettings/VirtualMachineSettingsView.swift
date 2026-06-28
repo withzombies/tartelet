@@ -96,13 +96,13 @@ private extension VirtualMachineSettingsView {
             isRefreshingVirtualMachines = false
         }
         do {
-            virtualMachineNames = try await self.virtualMachinesSourceNameRepository.sourceNames()
+            virtualMachineNames = try await virtualMachinesSourceNameRepository.sourceNames()
             if case let .virtualMachine(name) = settingsStore.virtualMachine, !virtualMachineNames.contains(name) {
                 settingsStore.virtualMachine = .unknown
             }
         } catch {
             #if DEBUG
-            print(error)
+                print(error)
             #endif
         }
     }

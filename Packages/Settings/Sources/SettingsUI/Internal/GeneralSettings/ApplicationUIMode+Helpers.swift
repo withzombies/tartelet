@@ -1,14 +1,14 @@
 import SettingsDomain
 
-extension ApplicationUIMode {
-    public var title: String {
+public extension ApplicationUIMode {
+    var title: String {
         switch self {
         case .dock:
-            return L10n.Settings.General.ApplicationUiMode.dock
+            L10n.Settings.General.ApplicationUiMode.dock
         case .menuBar:
-            return L10n.Settings.General.ApplicationUiMode.menuBar
+            L10n.Settings.General.ApplicationUiMode.menuBar
         case .dockAndMenuBar:
-            return L10n.Settings.General.ApplicationUiMode.dockAndMenuBar
+            L10n.Settings.General.ApplicationUiMode.dockAndMenuBar
         }
     }
 }

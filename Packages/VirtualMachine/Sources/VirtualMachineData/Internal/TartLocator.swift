@@ -7,7 +7,7 @@ enum TartLocatorError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .notFound:
-            return "Tart could not be found"
+            "Tart could not be found"
         }
     }
 }

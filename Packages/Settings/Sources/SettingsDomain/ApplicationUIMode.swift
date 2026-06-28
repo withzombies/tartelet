@@ -12,18 +12,18 @@ public enum ApplicationUIMode: String, CaseIterable, Equatable, Identifiable {
     public var showInDock: Bool {
         switch self {
         case .dock, .dockAndMenuBar:
-            return true
+            true
         case .menuBar:
-            return false
+            false
         }
     }
 
     public var showInMenuBar: Bool {
         switch self {
         case .menuBar, .dockAndMenuBar:
-            return true
+            true
         case .dock:
-            return false
+            false
         }
     }
 }

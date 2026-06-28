@@ -5,6 +5,7 @@ public final class TartVirtualMachine: VirtualMachine {
     public var name: String {
         vmName
     }
+
     public var canStart: Bool {
         true
     }

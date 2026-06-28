@@ -21,7 +21,7 @@ struct GitHubPrivateKeyPicker: View {
         isEnabled: Bool,
         onSelectFile: @escaping (URL) -> Void
     ) {
-        self._filename = filename
+        _filename = filename
         self.scope = scope
         self.isEnabled = isEnabled
         self.onSelectFile = onSelectFile

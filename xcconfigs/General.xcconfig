@@ -8,3 +8,5 @@ MACOSX_DEPLOYMENT_TARGET = 14.0
 ENABLE_HARDENED_RUNTIME = YES
 INFOPLIST_KEY_LSApplicationCategoryType = public.app-category.developer-tools
 INFOPLIST_KEY_NSLocalNetworkUsageDescription = Used to connect to macOS VMs over the local network
+SWIFT_TREAT_WARNINGS_AS_ERRORS = YES
+GCC_TREAT_WARNINGS_AS_ERRORS = YES

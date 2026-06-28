@@ -19,6 +19,7 @@ struct VirtualMachinePicker: View {
                     ForEach(virtualMachineNames, id: \.self) { virtualMachineName in
                         HStack {
                             Image(systemName: "desktopcomputer")
+                                .accessibilityHidden(true)
                             Text(virtualMachineName)
                         }.tag(VirtualMachine(named: virtualMachineName))
                     }
@@ -42,6 +43,7 @@ struct VirtualMachinePicker: View {
                         .opacity(isRefreshing ? 0 : 1)
                 }
             }.allowsHitTesting(!isRefreshing)
+                .accessibilityLabel("Refresh virtual machines")
         }
     }
 }

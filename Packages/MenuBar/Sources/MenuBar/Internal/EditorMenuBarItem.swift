@@ -15,12 +15,13 @@ struct EditorMenuBarItem: View {
             L10n.MenuBarItem.Editor.EditVirtualMachine.editing
         }
     }
+
     private var isEnabled: Bool {
         switch (configurationState, virtualMachineState) {
         case (.ready, .ready):
-            return true
+            true
         case (_, _):
-            return false
+            false
         }
     }
 

@@ -26,14 +26,14 @@ public enum ConfigurationState {
             self = .missingGitHubAppId
         } else if githubCredentialsStore.privateKey == nil {
             self = .missingGitHubPrivateKey
-        } else if settingsStore.githubRunnerScope == .organization
-                    && (githubCredentialsStore.organizationName ?? "").isEmpty {
+        } else if settingsStore.githubRunnerScope == .organization,
+                  (githubCredentialsStore.organizationName ?? "").isEmpty {
             self = .missingGitHubOrganizationName
-        } else if settingsStore.githubRunnerScope == .repo
-                    && (githubCredentialsStore.ownerName ?? "").isEmpty {
+        } else if settingsStore.githubRunnerScope == .repo,
+                  (githubCredentialsStore.ownerName ?? "").isEmpty {
             self = .missingGitHubOwnerName
-        } else if settingsStore.githubRunnerScope == .repo
-                    && (githubCredentialsStore.repositoryName ?? "").isEmpty {
+        } else if settingsStore.githubRunnerScope == .repo,
+                  (githubCredentialsStore.repositoryName ?? "").isEmpty {
             self = .missingGitHubRepositoryName
         } else {
             self = .ready

@@ -54,9 +54,7 @@ struct GitHubSettingsView<SettingsStoreType: SettingsStore & Observable>: View {
                     scope: settingsStore.githubRunnerScope,
                     isEnabled: isSettingsEnabled
                 ) { fileURL in
-                    Task {
-                        await storePrivateKey(at: fileURL)
-                    }
+                    storePrivateKey(at: fileURL)
                 }
             } footer: {
                 Button {
@@ -109,7 +107,7 @@ private extension GitHubSettingsView {
         NSWorkspace.shared.open(url)
     }
 
-    private func storePrivateKey(at fileURL: URL) async {
+    private func storePrivateKey(at fileURL: URL) {
         do {
             let data = try Data(contentsOf: fileURL)
             credentialsStore.setPrivateKey(data)
@@ -118,14 +116,14 @@ private extension GitHubSettingsView {
             privateKeyName = settingsStore.gitHubPrivateKeyName ?? ""
         } catch {
             #if DEBUG
-            print(error)
+                print(error)
             #endif
         }
     }
 
     private func persistRepositoryNameAndOwnerName() {
-        let repositoryName = !repositoryName.isEmpty ? self.repositoryName : nil
-        let ownerName = !ownerName.isEmpty ? self.ownerName : nil
+        let repositoryName = !repositoryName.isEmpty ? repositoryName : nil
+        let ownerName = !ownerName.isEmpty ? ownerName : nil
         credentialsStore.setRepository(repositoryName, withOwner: ownerName)
     }
 }

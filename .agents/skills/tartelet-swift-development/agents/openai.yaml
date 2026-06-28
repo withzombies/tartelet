@@ -1,0 +1,4 @@
+interface:
+  display_name: "Tartelet Swift Development"
+  short_description: "Swift workflow for Tartelet changes"
+  default_prompt: "Use $tartelet-swift-development to plan and implement a Swift change in Tartelet."

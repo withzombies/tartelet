@@ -13,6 +13,7 @@ public final class Keychain {
 }
 
 // MARK: - Passwords
+
 public extension Keychain {
     func setPassword(_ password: Data, forAccount account: String, belongingToService service: String) -> Bool {
         let findQuery = FindPasswordQuery(accessGroup: accessGroup, service: service, account: account)
@@ -22,7 +23,7 @@ public extension Keychain {
             guard updateStatus == errSecSuccess else {
                 logger.error(
                     "Failed updating password for account \(account) belong to service \(service)."
-                    + " Received status: \(updateStatus)"
+                        + " Received status: \(updateStatus)"
                 )
                 return false
             }
@@ -37,7 +38,7 @@ public extension Keychain {
             guard addStatus == errSecSuccess else {
                 logger.error(
                     "Failed setting password for account \(account) belong to service \(service)."
-                    + " Received status: \(addStatus)"
+                        + " Received status: \(addStatus)"
                 )
                 return false
             }
@@ -47,8 +48,10 @@ public extension Keychain {
 
     func setPassword(_ password: String, forAccount account: String, belongingToService service: String) -> Bool {
         guard let data = password.data(using: .utf8) else {
-            // swiftlint:disable:next line_length
-            logger.error("Failed setting password for account \(account) belong to service \(service) because the password could not be converted to UTF-8 data")
+            logger.error(
+                "Failed setting password for account \(account) belonging to service \(service) " +
+                    "because the password could not be converted to UTF-8 data"
+            )
             return false
         }
         return setPassword(data, forAccount: account, belongingToService: service)
@@ -74,6 +77,7 @@ public extension Keychain {
 }
 
 // MARK: - Keys
+
 public extension Keychain {
     func setKey(_ key: RSAPrivateKey, withTag tag: String) -> Bool {
         let findQuery = FindKeyQuery(accessGroup: accessGroup, tag: tag)
@@ -82,7 +86,7 @@ public extension Keychain {
             guard removeStatus == errSecSuccess else {
                 logger.error(
                     "Failed removing existing RSA private key with tag \(tag)."
-                    + " Received status code: \(removeStatus)"
+                        + " Received status code: \(removeStatus)"
                 )
                 return false
             }
@@ -92,7 +96,7 @@ public extension Keychain {
         guard addStatus == errSecSuccess else {
             logger.error(
                 "Failed storing RSA private key with tag \(tag)."
-                + " Received status code: \(addStatus)"
+                    + " Received status code: \(addStatus)"
             )
             return false
         }
@@ -114,8 +118,9 @@ public extension Keychain {
 }
 
 // MARK: - Helpers
+
 private extension Keychain {
-    private func read<T>(_ valueType: T.Type, usingQuery query: CFDictionary) -> T? {
+    private func read<T>(_: T.Type, usingQuery query: CFDictionary) -> T? {
         var item: CFTypeRef?
         let status = SecItemCopyMatching(query, &item)
         guard let value = item as? T, status == errSecSuccess else {

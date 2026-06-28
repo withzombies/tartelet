@@ -9,9 +9,9 @@ private enum URLSessionNetworkingServiceError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .invalidResponse:
-            return "Expected valid HTTP response"
-        case .unexpectedStatusCode(let statusCode):
-            return "Received unexpected status code: \(statusCode)"
+            "Expected valid HTTP response"
+        case let .unexpectedStatusCode(statusCode):
+            "Received unexpected status code: \(statusCode)"
         }
     }
 }
@@ -56,8 +56,8 @@ public struct URLSessionNetworkingService: NetworkingService {
         }
     }
 
-    public func load<T: Decodable>(_ valueType: T.Type, from request: URLRequest) async -> NetworkResponse<T> {
-        return await data(from: request).map { parameters in
+    public func load<T: Decodable>(_: T.Type, from request: URLRequest) async -> NetworkResponse<T> {
+        await data(from: request).map { parameters in
             do {
                 let value = try decoder.decode(T.self, from: parameters.value)
                 return .success(with: value, httpURLResponse: parameters.httpURLResponse)

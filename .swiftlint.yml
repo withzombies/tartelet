@@ -6,15 +6,23 @@ excluded:
   - "**/.build"
   - "**/.index-build"
 opt_in_rules:
+  - accessibility_label_for_image
+  - accessibility_trait_for_button
   - anonymous_argument_in_multiline_closure
   - array_init
+  - async_without_await
+  - balanced_xctest_lifecycle
+  - closure_end_indentation
+  - closure_spacing
   - collection_alignment
+  - comma_inheritance
   - conditional_returns_on_newline
   - contains_over_filter_count
   - contains_over_filter_is_empty
   - contains_over_first_not_nil
   - contains_over_range_nil_comparison
   - convenience_type
+  - direct_return
   - discarded_notification_center_observer
   - discouraged_assert
   - discouraged_none_name
@@ -24,42 +32,82 @@ opt_in_rules:
   - empty_count
   - empty_string
   - empty_xctest_method
+  - enum_case_associated_values_count
+  - expiring_todo
+  - extension_access_modifier
   - explicit_init
   - fallthrough
   - fatal_error_message
+  - file_name
   - file_name_no_space
+  - final_test_case
   - first_where
   - flatmap_over_map_reduce
+  - force_unwrapping
+  - ibinspectable_in_extension
   - identical_operands
+  - implicit_return
   - implicitly_unwrapped_optional
+  - incompatible_concurrency_annotation
   - joined_default_parameter
   - last_where
+  - legacy_multiple
+  - legacy_objc_type
+  - let_var_whitespace
   - literal_expression_end_indentation
+  - local_doc_comment
   - lower_acl_than_parent
+  - nslocalizedstring_key
+  - nslocalizedstring_require_bundle
   - modifier_order
   - number_separator
+  - optional_enum_case_matching
   - operator_usage_whitespace
+  - override_in_extension
   - overridden_super_call
   - pattern_matching_keywords
+  - period_spacing
+  - prefer_asset_symbols
+  - prefer_condition_list
+  - prefer_key_path
   - prefer_self_in_static_references
   - prefer_self_type_over_type_of_self
   - prefer_zero_over_explicit_init
+  - private_action
+  - private_outlet
+  - private_subject
+  - private_swiftui_state
   - prohibited_interface_builder
   - prohibited_super_call
+  - raw_value_for_camel_cased_codable_enum
   - reduce_into
+  - redundant_final
   - redundant_nil_coalescing
+  - redundant_self
   - redundant_type_annotation
+  - return_value_from_void_function
+  - self_binding
+  - shorthand_optional_binding
   - single_test_class
   - sorted_first_last
   - sorted_imports
   - static_operator
+  - strict_fileprivate
+  - strong_iboutlet
   - switch_case_on_newline
   - test_case_accessibility
   - toggle_bool
   - trailing_closure
+  - unavailable_function
+  - unhandled_throwing_task
+  - unneeded_escaping
   - unneeded_parentheses_in_closure_argument
+  - unowned_variable_capture
   - untyped_error_in_catch
+  - unused_parameter
   - vertical_parameter_alignment_on_call
+  - vertical_whitespace_closing_braces
+  - vertical_whitespace_opening_braces
   - yoda_condition
 analyzer_rules:
   - capture_variable

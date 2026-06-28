@@ -19,7 +19,7 @@ struct GitHubRunnerSettingsView<SettingsStoreType: SettingsStore & Observable>: 
                     Text(L10n.Settings.GithubRunner.disableDefaultLabels)
                 }
                 .disabled(!isSettingsEnabled)
-                
+
                 TextField(
                     L10n.Settings.GithubRunner.labels,
                     text: $settingsStore.gitHubRunnerLabels,
@@ -50,10 +50,10 @@ struct GitHubRunnerSettingsView<SettingsStoreType: SettingsStore & Observable>: 
 
     private var githubRunnerNamePrompt: String {
         switch settingsStore.virtualMachine {
-            case .unknown:
-                return L10n.Settings.GithubRunner.Name.prompt
-            case .virtualMachine(let name):
-                return name
+        case .unknown:
+            L10n.Settings.GithubRunner.Name.prompt
+        case let .virtualMachine(name):
+            name
         }
     }
 }

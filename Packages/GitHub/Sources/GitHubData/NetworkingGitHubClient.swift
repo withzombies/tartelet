@@ -14,19 +14,19 @@ private enum NetworkingGitHubClientError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .organizationNameUnavailable:
-            return "The organization name is not available"
+            "The organization name is not available"
         case .repositoryNameUnavailable:
-            return "The repository name is not available"
+            "The repository name is not available"
         case .repositoryOwnerNameUnavailable:
-            return "The repository owner name is not available"
+            "The repository owner name is not available"
         case .appIDUnavailable:
-            return "The app ID is not available"
+            "The app ID is not available"
         case .privateKeyUnavailable:
-            return "The private key is not available"
+            "The private key is not available"
         case .appIsNotInstalled:
-            return "The GitHub app has not been installed. Please install it from the developer settings."
+            "The GitHub app has not been installed. Please install it from the developer settings."
         case let .downloadNotFound(os, architecture):
-            return "Could not find a download for \(os) (\(architecture))"
+            "Could not find a download for \(os) (\(architecture))"
         }
     }
 }
@@ -64,7 +64,7 @@ public final class NetworkingGitHubClient: GitHubClient {
         with appAccessToken: GitHubAppAccessToken,
         runnerScope: GitHubRunnerScope
     ) async throws -> URL {
-        let url = try await baseURL.appending(path: runnerScope.runnerDownloadPath(using: credentialsStore))
+        let url = try baseURL.appending(path: runnerScope.runnerDownloadPath(using: credentialsStore))
         let request = URLRequest(url: url).addingBearerToken(appAccessToken.rawValue)
         let downloads = try await networkingService.load([GitHubRunnerDownload].self, from: request).map(\.value)
         let os = "osx"
@@ -76,10 +76,10 @@ public final class NetworkingGitHubClient: GitHubClient {
     }
 
     public func getRunnerRegistrationToken(
-      with appAccessToken: GitHubAppAccessToken,
-      runnerScope: GitHubRunnerScope
+        with appAccessToken: GitHubAppAccessToken,
+        runnerScope: GitHubRunnerScope
     ) async throws -> GitHubRunnerRegistrationToken {
-        let url = try await baseURL.appending(path: runnerScope.runnerRegistrationPath(using: credentialsStore))
+        let url = try baseURL.appending(path: runnerScope.runnerRegistrationPath(using: credentialsStore))
         var request = URLRequest(url: url).addingBearerToken(appAccessToken.rawValue)
         request.httpMethod = "POST"
         return try await networkingService.load(
@@ -94,20 +94,20 @@ public final class NetworkingGitHubClient: GitHubClient {
 private extension NetworkingGitHubClient {
     private func getAppInstallation(runnerScope: GitHubRunnerScope) async throws -> GitHubAppInstallation {
         let url = baseURL.appending(path: "/app/installations")
-        let token = try await getAppJWTToken()
+        let token = try getAppJWTToken()
         let request = URLRequest(url: url).addingBearerToken(token)
         let appInstallations = try await networkingService.load(
             [GitHubAppInstallation].self,
             from: request
         ).map(\.value)
-        let loginName = await runnerScope.runnerLogin(using: credentialsStore)
+        let loginName = runnerScope.runnerLogin(using: credentialsStore)
         guard let appInstallation = appInstallations.first(where: { $0.account.login == loginName }) else {
             throw NetworkingGitHubClientError.appIsNotInstalled
         }
         return appInstallation
     }
 
-    private func getAppJWTToken() async throws -> String {
+    private func getAppJWTToken() throws -> String {
         guard let privateKey = credentialsStore.privateKey else {
             throw NetworkingGitHubClientError.privateKeyUnavailable
         }
@@ -127,7 +127,7 @@ private extension URLRequest {
 }
 
 private extension GitHubRunnerScope {
-    func runnerRegistrationPath(using credentialsStore: GitHubCredentialsStore) async throws -> String {
+    func runnerRegistrationPath(using credentialsStore: GitHubCredentialsStore) throws -> String {
         switch self {
         case .organization:
             guard let organizationName = credentialsStore.organizationName else {
@@ -146,7 +146,7 @@ private extension GitHubRunnerScope {
         }
     }
 
-    func runnerDownloadPath(using credentialsStore: GitHubCredentialsStore) async throws -> String {
+    func runnerDownloadPath(using credentialsStore: GitHubCredentialsStore) throws -> String {
         switch self {
         case .organization:
             guard let organizationName = credentialsStore.organizationName else {
@@ -164,12 +164,12 @@ private extension GitHubRunnerScope {
         }
     }
 
-    func runnerLogin(using credentialsStore: GitHubCredentialsStore) async -> String? {
+    func runnerLogin(using credentialsStore: GitHubCredentialsStore) -> String? {
         switch self {
         case .organization:
-            return credentialsStore.organizationName
+            credentialsStore.organizationName
         case .repo:
-            return credentialsStore.ownerName
+            credentialsStore.ownerName
         }
     }
 }

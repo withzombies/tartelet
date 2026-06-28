@@ -30,13 +30,13 @@ private extension FleetMenuBarItem {
     private var title: String {
         switch (configurationState, virtualMachineState) {
         case (.ready, .stoppingFleet):
-            return L10n.MenuBarItem.VirtualMachines.stopping
+            L10n.MenuBarItem.VirtualMachines.stopping
         case (.ready, .fleetStarted):
-            return L10n.MenuBarItem.VirtualMachines.stop
+            L10n.MenuBarItem.VirtualMachines.stop
         case (.ready, .ready), (.ready, .editorStarted):
-            return L10n.MenuBarItem.VirtualMachines.start
+            L10n.MenuBarItem.VirtualMachines.start
         case (_, _):
-            return configurationState.shortInstruction
+            configurationState.shortInstruction
         }
     }
 
@@ -44,20 +44,20 @@ private extension FleetMenuBarItem {
         switch (configurationState, virtualMachineState) {
         case (.ready, .stoppingFleet),
              (.ready, .fleetStarted):
-            return Image(systemName: "stop.fill")
+            Image(systemName: "stop.fill")
         case (.ready, .ready), (.ready, .editorStarted):
-            return Image(systemName: "play.fill")
+            Image(systemName: "play.fill")
         case (_, _):
-            return Image(systemName: "switch.2")
+            Image(systemName: "switch.2")
         }
     }
 
     private var isDisabled: Bool {
         switch virtualMachineState {
         case .stoppingFleet, .editorStarted:
-            return true
+            true
         case .fleetStarted, .ready:
-            return false
+            false
         }
     }
 

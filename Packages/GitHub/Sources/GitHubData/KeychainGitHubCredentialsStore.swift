@@ -22,6 +22,7 @@ public final class KeychainGitHubCredentialsStore: GitHubCredentialsStore {
             belongingToService: serviceName
         )
     }
+
     public var repositoryName: String? {
         access(keyPath: \.repositoryName)
         return keychain.password(
@@ -29,6 +30,7 @@ public final class KeychainGitHubCredentialsStore: GitHubCredentialsStore {
             belongingToService: serviceName
         )
     }
+
     public var ownerName: String? {
         access(keyPath: \.ownerName)
         return keychain.password(
@@ -36,6 +38,7 @@ public final class KeychainGitHubCredentialsStore: GitHubCredentialsStore {
             belongingToService: serviceName
         )
     }
+
     public var appId: String? {
         access(keyPath: \.appId)
         return keychain.password(
@@ -43,6 +46,7 @@ public final class KeychainGitHubCredentialsStore: GitHubCredentialsStore {
             belongingToService: serviceName
         )
     }
+
     public var privateKey: Data? {
         access(keyPath: \.privateKey)
         return keychain.key(withTag: KeyTag.privateKey)?.data

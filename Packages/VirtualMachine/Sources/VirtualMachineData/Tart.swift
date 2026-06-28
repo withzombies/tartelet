@@ -27,7 +27,7 @@ public struct Tart {
         if !FileManager.default.fileExists(atPath: cacheFolder.path) {
             try FileManager.default.createDirectory(atPath: cacheFolder.path, withIntermediateDirectories: true)
         }
-        var runArgs =  ["run", "--dir=cache:\(cacheFolder.path())"]
+        var runArgs = ["run", "--dir=cache:\(cacheFolder.path())"]
         if let tartRunOptions = ProcessInfo.processInfo.environment["TARTELET_RUN_OPTIONS"] {
             runArgs.append(tartRunOptions)
         }

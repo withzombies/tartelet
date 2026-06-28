@@ -3,15 +3,16 @@ import Foundation
 import SettingsUI
 import VirtualMachineDomain
 
+@MainActor
 final class AppDelegate: NSObject, NSApplicationDelegate {
     private let settingsStore = Composers.settingsStore
     private let dock = Dock()
 
-    func applicationWillFinishLaunching(_ notification: Notification) {
+    func applicationWillFinishLaunching(_: Notification) {
         dock.setIconShown(Composers.settingsStore.applicationUIMode.showInDock)
     }
 
-    func applicationDidFinishLaunching(_ notification: Notification) {
+    func applicationDidFinishLaunching(_: Notification) {
         beginObservingAppIconVisibility()
         if Composers.settingsStore.startVirtualMachinesOnLaunch {
             Composers.fleet.start(numberOfMachines: Composers.settingsStore.numberOfVirtualMachines)
@@ -23,14 +24,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
 
-    // This delegate method let's you perform an action whenever the Finder reactivates an already
-    // running application when the app is double-clicked again or clicked on in the dock.
-    func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
+    /// This delegate method let's you perform an action whenever the Finder reactivates an already
+    /// running application when the app is double-clicked again or clicked on in the dock.
+    func applicationShouldHandleReopen(_: NSApplication, hasVisibleWindows _: Bool) -> Bool {
         openSettingsWindow()
         return true
     }
 
-    func applicationWillTerminate(_ notification: Notification) {
+    func applicationWillTerminate(_: Notification) {
         Composers.editor.stop()
         Composers.fleet.stop()
     }
@@ -40,8 +41,11 @@ private extension AppDelegate {
     private func beginObservingAppIconVisibility() {
         withObservationTracking {
             _ = settingsStore.applicationUIMode
-        } onChange: {
-            DispatchQueue.main.async {
+        } onChange: { [weak self] in
+            Task { @MainActor in
+                guard let self else {
+                    return
+                }
                 self.dock.setIconShown(self.settingsStore.applicationUIMode.showInDock)
                 self.beginObservingAppIconVisibility()
             }

@@ -18,7 +18,7 @@ extension NSFileCoordinator {
         }
         if let coordinationError {
             throw coordinationError
-        } else if let writeError = writeError {
+        } else if let writeError {
             throw writeError
         }
     }
@@ -47,8 +47,10 @@ extension NSFileCoordinator {
             throw coordinationError
         } else if let writeError = readError {
             throw writeError
+        } else if let value {
+            return value
         } else {
-            return value!
+            throw CocoaError(.fileReadUnknown)
         }
     }
 
@@ -80,8 +82,10 @@ extension NSFileCoordinator {
             throw coordinationError
         } else if let writeError = readError {
             throw writeError
+        } else if let value {
+            return value
         } else {
-            return value!
+            throw CocoaError(.fileReadUnknown)
         }
     }
 }

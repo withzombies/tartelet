@@ -31,7 +31,7 @@ public struct MenuBarItem<SettingsStoreType: SettingsStore & Observable>: Scene 
         self.editor = editor
         self.configurationState = configurationState
         self.virtualMachineState = virtualMachineState
-        self.isInserted = settingsStore.applicationUIMode.showInMenuBar
+        isInserted = settingsStore.applicationUIMode.showInMenuBar
     }
 
     public var body: some Scene {
@@ -84,7 +84,6 @@ private extension MenuBarItem {
         NSApplication.shared.terminate(nil)
     }
 
-    @ViewBuilder
     private func makeVirtualMachinesMenuContent() -> some View {
         VirtualMachinesMenuContent(
             configurationState: configurationState,

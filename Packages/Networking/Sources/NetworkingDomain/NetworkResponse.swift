@@ -16,10 +16,10 @@ public enum NetworkResponse<T> {
 
     public var httpURLResponse: HTTPURLResponse? {
         switch self {
-        case .success(let parameters):
-            return parameters.httpURLResponse
-        case .failure(let parameters):
-            return parameters.httpURLResponse
+        case let .success(parameters):
+            parameters.httpURLResponse
+        case let .failure(parameters):
+            parameters.httpURLResponse
         }
     }
 
@@ -35,9 +35,9 @@ public enum NetworkResponse<T> {
 
     public func map<U>(handler: (SuccessParameters) throws -> U) throws -> U {
         switch self {
-        case .success(let parameters):
+        case let .success(parameters):
             return try handler(parameters)
-        case .failure(let parameters):
+        case let .failure(parameters):
             throw parameters.error
         }
     }
@@ -48,13 +48,13 @@ public enum NetworkResponse<T> {
 
     public func map<U>(handler: (SuccessParameters) throws -> NetworkResponse<U>) -> NetworkResponse<U> {
         switch self {
-        case .success(let parameters):
+        case let .success(parameters):
             do {
                 return try handler(parameters)
             } catch {
                 return .failure(withError: error, httpURLResponse: parameters.httpURLResponse)
             }
-        case .failure(let parameters):
+        case let .failure(parameters):
             return .failure(withError: parameters.error, httpURLResponse: parameters.httpURLResponse)
         }
     }

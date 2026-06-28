@@ -16,6 +16,7 @@ public final class FileLogger: LoggingDomain.Logger {
     private var logsDirectory: LogsDirectory {
         LogsDirectory(fileSystem: fileSystem)
     }
+
     private var latestLogsRemovalDate: Date?
     private var shouldRemoveOldLogs: Bool {
         guard let latestLogsRemovalDate else {

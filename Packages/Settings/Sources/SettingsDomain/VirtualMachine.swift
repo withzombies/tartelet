@@ -7,9 +7,9 @@ public enum VirtualMachine: RawRepresentable, Hashable {
     public var rawValue: String {
         switch self {
         case .unknown:
-            return Self.rawValueForUnknown
-        case .virtualMachine(let name):
-            return Self.rawValueForVirtualMachine(named: name)
+            Self.rawValueForUnknown
+        case let .virtualMachine(name):
+            Self.rawValueForVirtualMachine(named: name)
         }
     }
 
@@ -31,9 +31,9 @@ public enum VirtualMachine: RawRepresentable, Hashable {
     public var name: String {
         switch self {
         case .unknown:
-            return "Unknown"
-        case .virtualMachine(let name):
-            return name
+            "Unknown"
+        case let .virtualMachine(name):
+            name
         }
     }
 }
